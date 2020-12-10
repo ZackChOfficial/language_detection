@@ -1,0 +1,2 @@
+gcc main.c stack.c trie.c utils.c  dawg.c
+./a.out

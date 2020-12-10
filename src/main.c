@@ -24,7 +24,6 @@ Dawg construct(char *dict) {
     }
 
     // read file
-    printf("hi\n");
     while ((read = getline(&line, &len, fp)) != -1) {
         // remove newline
         size_t length = strlen(line);
@@ -32,13 +31,10 @@ Dawg construct(char *dict) {
         {
             line[length-1] ='\0';
         }
-
         // here insert the word in the trie or in the DAWG
-        printf("ko\n");
         dawg_insert(tree, line);
-        printf("ok\n");
+        // printf("ok\n");
     }
-    printf("hi\n");
     dawg_finish(tree);
     fclose(fp);
     free(line);
@@ -47,10 +43,11 @@ Dawg construct(char *dict) {
 
 int main(int argc, char* argv[]) {
     // construct("dict/french-wordlist.txt");
-    Dawg tree = construct("../dict/english-wordlist.txt");
-    if (dawg_search(tree, "zulus"))
+    Dawg tree = construct("../dict/test.txt");
+    // dawg_print(tree->root, 0);
+    if (dawg_search(tree, "aac"))
         printf("yes\n");
-    else printf("NO");
+    else printf("NO\n");
     // construct("dict/german-wordlist.txt");
     // Here listen for user input, parse it and detect the language of the given text
     // To complete ...
