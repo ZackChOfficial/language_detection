@@ -1,45 +1,109 @@
-// #include "trie.h"
-#include "dawg.h"
+#include "construct.h"
+#define length 4096
 
-Dawg construct(char *dict) {
-    // Instantiate either a Trie or a DAWG here
-    Dawg tree = dawg_init();
+int     choose_algo()
+{
+    int     algo;
+    char    input[100];
 
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t read;
-    FILE *fp;
+    printf("1 - DAWG\n");
+    printf("2 - Trie\n");
+    while (1)
+    {
+        printf("Please choose one of the above algorithm: ");
+        scanf("%s", input);
+        algo = atoi(input);
+        if (algo != 1 && algo != 2)
+            printf("Invalid choice.\n");
+        else return algo;
+    }
+}
 
-    // open file
-    fp = fopen(dict, "r"); // read mode
-    if (fp == NULL) {
-        perror("Error while opening the file.\n");
+char       *get_input()
+{
+    char    *string;
+    char    c;
+    size_t     len = length;
+
+    string = (char*)malloc(sizeof(char) * length);
+    scanf("%c", &c);
+    if (!string)
         exit(EXIT_FAILURE);
-    }
+    getline(&string, &len, stdin);
+    return string;
+}
 
-    // read file
-    int i=0;
-    while ((read = getline(&line, &len, fp)) != -1) {
-        // remove newline
-        size_t length = strlen(line);
-        if((length > 0) && (line[length-1] == '\n'))
-        {
-            line[length-1] ='\0';
-        }
-        dawg_insert(tree, line);
+void        print_language(int fr, int en, int ger)
+{
+    if (en > fr && en > ger)
+        printf("Language: English\n");
+    else if (fr > en && fr > ger)
+        printf("Language: French\n");
+    else if (ger > en && ger > fr)
+        printf("Language: German\n");
+    else
+    printf("Language: uncertain\n"); 
+}
+
+void        detect_with_dawg(char  *string)
+{
+    Dawg    french = construct_dawg("../dict/french-wordlist.txt");
+    Dawg    german = construct_dawg("../dict/german-wordlist.txt");
+    Dawg    english = construct_dawg("../dict/english-wordlist.txt");
+    int     fr = 0;
+    int     en = 0;
+    int     ger = 0;
+    char    *word;
+
+    word = strtok(string, " ");
+    while (word != NULL)
+    {
+        if (dawg_search(french, word))
+            fr++;
+        if (dawg_search(english, word))
+            en++;
+        if (dawg_search(german, word))
+            ger++;
+        word = strtok(NULL, " ");
     }
-    dawg_finish(tree);
-    fclose(fp);
-    free(line);
-    return tree;
+    print_language(fr,en,ger);
+}
+
+void detect_with_trie(char  *string)
+{
+    Trie    french = construct_trie("../dict/french-wordlist.txt");
+    Trie    german = construct_trie("../dict/german-wordlist.txt");
+    Trie    english = construct_trie("../dict/english-wordlist.txt");
+    int     fr = 0;
+    int     en = 0;
+    int     ger = 0;
+    char    *word;
+
+    word = strtok(string, " ");
+    while (word != NULL)
+    {
+        if (trie_rech(french, word))
+            fr++;
+        if (trie_rech(english, word))
+            en++;
+        if (trie_rech(german, word))
+            ger++;
+        word = strtok(NULL, " ");
+    }
+    print_language(fr,en,ger);
 }
 
 int main(int argc, char* argv[]) {
-    Dawg tree1 = construct("../dict/french-wordlist.txt");
-    Dawg tree2 = construct("../dict/german-wordlist.txt");
-    Dawg tree = construct("../dict/test.txt");
-    if (dawg_search(tree, "zygomas"))
-        printf("yes\n");
-    else printf("NO\n");
+
+    int     algo;
+    char    *string;
+
+    algo = choose_algo();
+    string = get_input();
+    if (algo == 1)
+        detect_with_dawg(string);
+    else
+        detect_with_trie(string);
+    free(string);
     return 0;
 }

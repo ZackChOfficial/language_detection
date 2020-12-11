@@ -18,10 +18,17 @@ Trie trie_init()
 // nouveau mot.
 Trie trie_insert(Trie t, char * mot)
 {
-    int lgr = strlen(mot);
+    int lgr;
     int ind;
 
     Trie tmp = t;
+    parse_word(mot);
+    lgr = strlen(mot);
+    if (!lgr)
+    {
+        perror("invalid word\n");
+        exit(EXIT_FAILURE);
+    }
     for (int i = 0; i < lgr; i++)
     {
         ind = ascii_to_index(mot[i]);
@@ -36,10 +43,17 @@ Trie trie_insert(Trie t, char * mot)
 // Recherche le mot 'mot' dans le trie 't'. Renvoie true d'il y est, false sinon
 bool trie_rech(Trie t, char * mot)
 {
-    int lgr = strlen(mot);
+    int lgr;
     int ind;
 
     Trie tmp = t;
+    parse_word(mot);
+    lgr = strlen(mot);
+    if (!lgr)
+    {
+        perror("invalid word\n");
+        exit(EXIT_FAILURE);
+    }
     for (int i = 0; i < lgr; i++)
     {
         ind = ascii_to_index(mot[i]);

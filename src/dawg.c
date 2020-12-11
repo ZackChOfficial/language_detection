@@ -120,7 +120,14 @@ void dawg_insert(Dawg tree, char    *word)
     int         length;
     int         common_prefix;
 
+    parse_word(word);
     length = strlen(word);
+    if (strcmp(tree->last_word, word) > 0)
+    {
+        printf("words must be in alphabetical order\n");
+        printf("last word: %s   word: %s\n",tree->last_word, word);
+        exit(EXIT_FAILURE);
+    }
     if (!length)
         return;
     common_prefix = Common_prefix(tree->last_word, word);
@@ -134,15 +141,12 @@ void dawg_insert(Dawg tree, char    *word)
         node = tree->root;
     for (int i = common_prefix ; i < length; i++)
     {
-        if (word[i] >= 'a' && word[i] <= 'z')
-        {
             newNode = create_new_Dawg_node(tree->id++);
             tree->size++; // keep tracking the number of nodes
             newEdge = create_new_edge(node, newNode, word[i]);
             node->children[ascii_to_index(word[i])] = newNode;
             stack_push(tree->unregistered, newEdge);
             node = newNode;
-        }
     }
     node->isWord = true;
     free(tree->last_word);
@@ -179,10 +183,13 @@ bool    dawg_search(Dawg tree, char *word)
 
     for (int i=0; i < length; i++)
     {
-        index = ascii_to_index(word[i]);
-        if (current->children[index] == NULL)
-            return false;
-        current = current->children[index];
+        if (word[i] >='a' && word[i] <= 'z')
+        {
+            index = ascii_to_index(word[i]);
+            if (current->children[index] == NULL)
+                return false;
+            current = current->children[index];
+        }
     }
     return (current != NULL && current->isWord);
 }
