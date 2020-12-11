@@ -1,12 +1,6 @@
 // #include "trie.h"
 #include "dawg.h"
 
-/*
- * Copy this function template to construct either a DAWG or a trie
- * based on the dictionary filename given
- *
- * Don't forget to change the void return type of this function
- */
 Dawg construct(char *dict) {
     // Instantiate either a Trie or a DAWG here
     Dawg tree = dawg_init();
@@ -42,15 +36,10 @@ Dawg construct(char *dict) {
 
 int main(int argc, char* argv[]) {
     Dawg tree1 = construct("../dict/french-wordlist.txt");
-    // Dawg tree2 = construct("../dict/german-wordlist.txt");
-    Dawg tree = construct("../dict/english-wordlist.txt");
-    // dawg_print(tree->root, 0);
-    if (dawg_search(tree, "zygomasc"))
+    Dawg tree2 = construct("../dict/german-wordlist.txt");
+    Dawg tree = construct("../dict/test.txt");
+    if (dawg_search(tree, "zygomas"))
         printf("yes\n");
     else printf("NO\n");
-    // printf("nb nodes: %d\n", tree->size);
-    // construct("dict/german-wordlist.txt");
-    // Here listen for user input, parse it and detect the language of the given text
-    // To complete ...
     return 0;
 }

@@ -49,6 +49,9 @@ char* concat(const char *s1, const char *s2)
     return result;
 }
 
+/**
+ * Return the number of digit
+*/
 static	int	ft_nbrlen(int n)
 {
 	int l;
@@ -66,6 +69,10 @@ static	int	ft_nbrlen(int n)
 	}
 	return (l);
 }
+
+/**
+ * return a string copy allocated in the heap memory
+*/
 char        *ft_strdup(const char  *str)
 {
     int len = 0;
@@ -79,6 +86,10 @@ char        *ft_strdup(const char  *str)
     newStr[len] = '\0';
     return newStr;
 }
+
+/**
+ * Convert Number to string
+*/
 char		*ft_itoa(int n)
 {
 	int		len;
