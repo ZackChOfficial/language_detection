@@ -13,7 +13,8 @@ typedef struct          s_dawg_node
     int          label;
     struct s_dawg_node  *children[26];
     bool                isWord;
-    char c;
+    
+    // char c;
 }                       *Dawg_node;
 
 typedef struct  s_edge
@@ -30,6 +31,7 @@ typedef struct          s_dawg
     struct hashmap_s    *registered;
     Stack               unregistered;
     int                 id;
+    int         size;
 }                       *Dawg;
 
 void    dawg_insert(Dawg tree, char*   word);

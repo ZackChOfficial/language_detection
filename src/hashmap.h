@@ -204,7 +204,6 @@ int hashmap_create(const unsigned initial_size,
     {
         return 1;
     }
-
     out_hashmap->data =
         HASHMAP_CAST(struct hashmap_element_s *,
                      calloc(initial_size, sizeof(struct hashmap_element_s)));
@@ -212,10 +211,8 @@ int hashmap_create(const unsigned initial_size,
     {
         return 1;
     }
-
     out_hashmap->table_size = initial_size;
     out_hashmap->size = 0;
-
     return 0;
 }
 
