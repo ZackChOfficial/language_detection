@@ -26,7 +26,7 @@ Trie trie_insert(Trie t, char * mot)
     lgr = strlen(mot);
     if (!lgr)
     {
-        perror("invalid word\n");
+        perror("invalid input\n");
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < lgr; i++)
@@ -51,7 +51,7 @@ bool trie_rech(Trie t, char * mot)
     lgr = strlen(mot);
     if (!lgr)
     {
-        perror("invalid word\n");
+        perror("invalid input\n");
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < lgr; i++)

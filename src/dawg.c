@@ -178,18 +178,18 @@ Dawg    dawg_init()
 bool    dawg_search(Dawg tree, char *word)
 {
     Dawg_node   current = tree->root;
-    int         length = strlen(word);
+    int         length;
     int         index;
 
+    parse_word(word);
+    length = strlen(word);
+    if (!length)return false;
     for (int i=0; i < length; i++)
     {
-        if (word[i] >='a' && word[i] <= 'z')
-        {
-            index = ascii_to_index(word[i]);
-            if (current->children[index] == NULL)
-                return false;
-            current = current->children[index];
-        }
+        index = ascii_to_index(word[i]);
+        if (current->children[index] == NULL)
+            return false;
+        current = current->children[index];
     }
     return (current != NULL && current->isWord);
 }
