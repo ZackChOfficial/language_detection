@@ -52,7 +52,6 @@ Edge create_new_edge(Dawg_node left, Dawg_node right, char label)
 char    *get_key(Dawg_node node)
 {
     char    *key;
-    char    *tmp;
     char    *l;
 
     key = "";

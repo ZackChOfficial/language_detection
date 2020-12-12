@@ -19,7 +19,6 @@ Dawg construct_dawg(char *dict)
     }
 
     // read file
-    int i=0;
     while ((read = getline(&line, &len, fp)) != -1) {
         // remove newline
         size_t length = strlen(line);
@@ -53,7 +52,6 @@ Trie construct_trie(char *dict)
     }
 
     // read file
-    int i=0;
     while ((read = getline(&line, &len, fp)) != -1) {
         // remove newline
         size_t length = strlen(line);

@@ -47,9 +47,9 @@ void        print_language(int fr, int en, int ger)
 
 void        detect_with_dawg(char  *string)
 {
-    Dawg    french = construct_dawg("../dict/french-wordlist.txt");
-    Dawg    german = construct_dawg("../dict/german-wordlist.txt");
-    Dawg    english = construct_dawg("../dict/english-wordlist.txt");
+    Dawg    french = construct_dawg("./dict/french-wordlist.txt");
+    Dawg    german = construct_dawg("./dict/german-wordlist.txt");
+    Dawg    english = construct_dawg("./dict/english-wordlist.txt");
     int     fr = 0;
     int     en = 0;
     int     ger = 0;
@@ -93,7 +93,7 @@ void detect_with_trie(char  *string)
     print_language(fr,en,ger);
 }
 
-int main(int argc, char* argv[]) {
+int main() {
 
     int     algo;
     char    *string;
