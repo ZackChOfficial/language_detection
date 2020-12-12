@@ -1,5 +1,8 @@
 #include "construct.h"
 #define length 4096
+#define FRENCH_DICT "./dict/french-wordlist.txt"
+#define ENGLISH_DICT "./dict/english-wordlist.txt"
+#define GERMAN_DICT "./dict/german-wordlist.txt"
 
 int     choose_algo()
 {
@@ -47,9 +50,9 @@ void        print_language(int fr, int en, int ger)
 
 void        detect_with_dawg(char  *string)
 {
-    Dawg    french = construct_dawg("../dict/french-wordlist.txt");
-    Dawg    german = construct_dawg("../dict/german-wordlist.txt");
-    Dawg    english = construct_dawg("../dict/english-wordlist.txt");
+    Dawg    french = construct_dawg(FRENCH_DICT);
+    Dawg    german = construct_dawg(GERMAN_DICT);
+    Dawg    english = construct_dawg(ENGLISH_DICT);
     int     fr = 0;
     int     en = 0;
     int     ger = 0;
@@ -71,9 +74,9 @@ void        detect_with_dawg(char  *string)
 
 void detect_with_trie(char  *string)
 {
-    Trie    french = construct_trie("../dict/french-wordlist.txt");
-    Trie    german = construct_trie("../dict/german-wordlist.txt");
-    Trie    english = construct_trie("../dict/english-wordlist.txt");
+    Trie    french = construct_trie(FRENCH_DICT);
+    Trie    german = construct_trie(GERMAN_DICT);
+    Trie    english = construct_trie(ENGLISH_DICT);
     int     fr = 0;
     int     en = 0;
     int     ger = 0;
@@ -93,7 +96,7 @@ void detect_with_trie(char  *string)
     print_language(fr,en,ger);
 }
 
-int main(int argc, char* argv[]) {
+int main() {
 
     int     algo;
     char    *string;
