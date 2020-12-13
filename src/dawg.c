@@ -123,8 +123,7 @@ void dawg_insert(Dawg tree, char    *word)
     length = strlen(word);
     if (strcmp(tree->last_word, word) > 0)
     {
-        printf("words must be in alphabetical order\n");
-        printf("last word: %s   word: %s\n",tree->last_word, word);
+        perror("Words must be in alphabetical order\n");
         exit(EXIT_FAILURE);
     }
     if (!length)
