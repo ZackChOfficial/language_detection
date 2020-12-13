@@ -1,2 +1,0 @@
-gcc main.c stack.c trie.c utils.c  dawg.c construct.c
-./a.out
