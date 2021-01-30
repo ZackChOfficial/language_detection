@@ -32,6 +32,7 @@ char       *get_input()
     scanf("%c", &c);
     if (!string)
         exit(EXIT_FAILURE);
+    printf("Please insert your sentence: ");
     getline(&string, &len, stdin);
     return string;
 }
@@ -85,15 +86,18 @@ void detect_with_trie(char  *string)
     word = strtok(string, " ");
     while (word != NULL)
     {
-        if (trie_rech(french, word))
+        if (trie_search(french, word))
             fr++;
-        if (trie_rech(english, word))
+        if (trie_search(english, word))
             en++;
-        if (trie_rech(german, word))
+        if (trie_search(german, word))
             ger++;
         word = strtok(NULL, " ");
     }
     print_language(fr,en,ger);
+    trie_delete(french);
+    trie_delete(german);
+    trie_delete(english);
 }
 
 int main() {
