@@ -1,6 +1,9 @@
 #include "construct.h"
 
 
+/**
+ * Construct DAWG Tree from dictionary file passed as args
+*/
 Dawg construct_dawg(char *dict)
 {
     // Instantiate either a Trie or a DAWG here
@@ -34,6 +37,9 @@ Dawg construct_dawg(char *dict)
     return tree;
 }
 
+/**
+ * Construct Trie from dictionary file passed as args
+*/
 Trie construct_trie(char *dict)
 {
     // Instantiate either a Trie or a DAWG here

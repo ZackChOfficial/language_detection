@@ -7,13 +7,13 @@
 #include "utils.h"
 
 typedef struct trie {
-    struct trie * fils[26];
-    bool est_mot;
+    struct trie *childrens[26];
+    bool is_word;
 } *Trie;
 
 Trie trie_init();
-Trie trie_insert(Trie t, char * mot);
-bool trie_rech(Trie t, char * mot);
-void trie_sup(Trie t);
+Trie trie_insert(Trie t, char *word);
+bool trie_search(Trie t, char *word);
+void trie_delete(Trie t);
 
 #endif
